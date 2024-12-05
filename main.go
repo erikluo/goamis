@@ -2,8 +2,11 @@ package main
 
 import (
 	"embed"
+	"encoding/json"
+	"fmt"
 	"html/template"
 	"io/fs"
+	"io/ioutil"
 	"log"
 	"net/http"
 	"os"
@@ -111,6 +114,7 @@ func main() {
 	// 首页直接跳转到默认页面
 	engine.GET("/", func(c *gin.Context) { c.Redirect(http.StatusPermanentRedirect, "/page/"+defaultIndex) })
 	engine.GET("/page/:name", renderPage)
+	engine.GET("/staticpage/:name", renderStaticPage)
 
 	// 页面配置
 	engine.GET("/config/list", listConfig)
@@ -132,6 +136,34 @@ func renderPage(c *gin.Context) {
 		"pageTitle":     name,
 		"pageSchemaApi": "GET:/config/get/" + name,
 		"getConfigAddr": "/config/get/" + name,
+	})
+}
+
+func renderStaticPage(c *gin.Context) {
+	name := c.Param("name")
+	if name == "" {
+		name = "404"
+	}
+
+	pageData, _ := ioutil.ReadFile(fmt.Sprintf("static/%s.json", name))
+
+	// _ = boltDB.View(func(tx *bolt.Tx) error {
+	// 	bucket := tx.Bucket(defaultBucket)
+	// 	pageData = bucket.Get([]byte(name))
+	// 	return nil
+	// })
+	// 404
+	if len(pageData) == 0 {
+		pageData = page404Data
+	}
+
+	m := map[string]interface{}{}
+	if err := json.Unmarshal(pageData, &m); err != nil {
+		panic(err)
+	}
+
+	c.HTML(http.StatusOK, "amis_static.tmpl", gin.H{
+		"AmisJson": m,
 	})
 }
 

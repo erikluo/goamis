@@ -1,0 +1,111 @@
+{
+  "type": "page",
+  "body": [
+    
+    {
+      "type": "form",
+      "api": "https://test.com/saveForm?waitSeconds=2",
+      "title": "",
+      "mode": "horizontal",
+      "wrapWithPanel": true,
+      "className": "m-t",
+      "body": [
+        {
+          "type": "combo",
+          "name": "combo_catagory",
+          "label": "分类",
+          "multiple": true,
+          "value": [
+            {
+              "a": "默认"
+            },
+            {
+              "a": "常用"
+            }
+          ],
+          "draggable": true,
+          "items": [
+            {
+              "name": "a",
+              "type": "input-text",
+              "placeholder": "类别名称",
+              "unique": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "divider"
+    },
+
+
+    {
+      "type": "form",
+      "api": "https://test.com/saveForm?waitSeconds=2",
+      "title": "",
+      "mode": "horizontal",
+      "wrapWithPanel": true,
+      "className": "m-t",
+      "body": [
+        {
+          "type": "combo",
+          "name": "combo_sites",
+          "label": "网址",
+          "multiple": true,
+          "value": [
+            {
+              "title": "默认",
+              "desc": "默认",
+              "site": "https://www.baidu.com",
+              "cata": "默认"
+            },
+            {
+              "title": "qq",
+              "desc": "qq",
+              "site": "https://www.qq.com",
+              "cata": "默认"
+            }
+          ],
+          "draggable": true,
+          "items": [
+            {
+              "name": "title",
+              "type": "input-text",
+              "placeholder": "title",
+              "unique": true
+            },
+            {
+              "name": "desc",
+              "type": "input-text",
+              "placeholder": "描述",
+              "unique": true
+            },
+            {
+              "name": "site",
+              "type": "input-text",
+              "placeholder": "网址",
+              "unique": true
+            },
+            {
+              "name": "cata",
+              "type": "select",
+              "placeholder": "请选择分类",
+              "options": [
+                "默认",
+                "b",
+                "c"
+              ],
+              "unique": true
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "regions": [
+    "body"
+  ],
+  "messages": {},
+  "className": "r b-a b-2x"
+}
