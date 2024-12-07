@@ -35,6 +35,12 @@
         }
       ]
     },
+
+    {
+      "type": "tag",
+      "label": "普通标签",
+      "color": "processing"
+    },
     {
       "type": "divider"
     },
